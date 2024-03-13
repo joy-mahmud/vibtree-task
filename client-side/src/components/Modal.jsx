@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import axios from 'axios';
 import { Box, Typography } from '@mui/material';
+import UploadButton from './UploadButton';
 
 export default function EditProfile({ user,refetch }) {
     const [open, setOpen] = useState(false);
@@ -40,11 +41,13 @@ export default function EditProfile({ user,refetch }) {
                         const email = formJson.email;
                         const phone = formJson.phone;
                         const dob = formJson.dob
+                        
                         const userInfo = { name, email, phone,dob }
                         const res = await axios.patch(`http://localhost:5000/updateUser?email=${user.email}`, userInfo)
                         if(res.data){
                             refetch()
                         }
+                        
                         handleClose();
                     },
                 }}
@@ -102,6 +105,7 @@ export default function EditProfile({ user,refetch }) {
                             color='secondary'
                         />
                     </Box>
+                    {/* <UploadButton></UploadButton> */}
                 </DialogContent>
                 <DialogActions>
                     <Button color='secondary' onClick={handleClose}>Cancel</Button>
